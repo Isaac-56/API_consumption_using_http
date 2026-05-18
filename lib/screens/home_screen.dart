@@ -18,8 +18,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final TextEditingController _deleteIdController = TextEditingController();
   bool _completed = false;
   bool _updateCompleted = false;
-  int _userId = 1;
-
+  // userId removed – we'll always use 1
   @override
   Widget build(BuildContext context) {
     final todoProvider = Provider.of<TodoProvider>(context);
@@ -155,7 +154,6 @@ class _HomeScreenState extends State<HomeScreen> {
   void _showCreateDialog(TodoProvider provider) {
     _titleController.clear();
     _completed = false;
-    _userId = 1;
     showDialog(
       context: context,
       builder: (ctx) {
@@ -183,25 +181,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ],
                   ),
-                  Row(
-                    children: [
-                      const Text('User ID: '),
-                      Expanded(
-                        child: Slider(
-                          value: _userId.toDouble(),
-                          min: 1,
-                          max: 10,
-                          divisions: 9,
-                          onChanged: (value) {
-                            setStateDialog(() {
-                              _userId = value.toInt();
-                            });
-                          },
-                        ),
-                      ),
-                      Text('$_userId'),
-                    ],
-                  ),
                 ],
               );
             },
@@ -215,7 +194,7 @@ class _HomeScreenState extends State<HomeScreen> {
               onPressed: () {
                 if (_titleController.text.isNotEmpty) {
                   final newTodo = Todo(
-                    userId: _userId,
+                    userId: 1,
                     title: _titleController.text,
                     completed: _completed,
                   );
